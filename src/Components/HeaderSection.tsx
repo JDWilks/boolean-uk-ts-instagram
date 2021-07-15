@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from "react";
 
+type User = {
+  id: number;
+  username: string;
+  avatar: string;
+};
+
 function HeaderSection() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    console.log("is this working useffect");
     fetch("http://localhost:4000/users")
       .then((resp) => resp.json())
       .then(setUsers);
   }, []);
 
-  if (!users) console.log("errrrrrorrrrrr");
-
   return (
     <>
       <header className="main-header">
         <div className="wrapper">
-          {users.map((user) => {
-            return (
-              <div className="chip">
-                <div className="avatar-small">
-                  <img
-                    src="https://uploads5.wikiart.org/images/salvador-dali.jpg!Portrait.jpg"
-                    alt="Salvador Dali"
-                  />
-                </div>
-                <span>Salvador Dali</span>
+          {users.map((user) => (
+            <div key={user.id} className="chip">
+              <div className="avatar-small">
+                <img src={user.avatar} alt={user.username} />
               </div>
-            );
-          })}
+              <span>{user.username}</span>
+            </div>
+          ))}
         </div>
       </header>
     </>
