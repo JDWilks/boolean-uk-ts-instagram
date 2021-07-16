@@ -1,22 +1,25 @@
 import React from "react";
-import { Post } from "../Types";
+import { Post, User } from "../Types";
 import CommentListitem from "./Comment";
 
 type PostProps = {
   post: Post;
+  users: User[];
 };
 
 function PostListItem(props: PostProps) {
+  let postUser: User | undefined = props.users.find(
+    (user) => props.post.userId === user.id
+  );
+  //   console.log("this is the postuser", postUser);
+
   return (
     <li className="post">
       <div className="chip active">
         <div className="avatar-small">
-          <img
-            src="https://uploads5.wikiart.org/images/salvador-dali.jpg!Portrait.jpg"
-            alt="Salvador Dali"
-          />
+          <img src={postUser.avatar} alt={postUser.username} />
         </div>
-        <span>Salvador Dali</span>
+        <span>{postUser.username}</span>
       </div>
       <div className="post--image">
         <img src={props.post.image.src} alt="undefined" />
@@ -28,7 +31,7 @@ function PostListItem(props: PostProps) {
       <div className="post--comments">
         <h3>Comments</h3>
         {props.post.comments.map((comment) => (
-          <CommentListitem comment={comment} />
+          <CommentListitem comment={comment} users={props.users} />
         ))}
 
         <form id="create-comment-form" autoComplete="off">

@@ -15,7 +15,7 @@ function MainSection(props: MainProps) {
         <CreatePostSection />
       </section>
       <section className="feed">
-        <Feed posts={props.posts} />
+        <Feed posts={props.posts} users={props.users} />
       </section>
     </main>
   );

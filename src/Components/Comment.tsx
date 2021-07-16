@@ -1,28 +1,24 @@
 import React from "react";
-import { Comment } from "../Types";
+import { Comment, User } from "../Types";
 
 type CommentProps = {
   comment: Comment;
+  users: User[];
 };
 
 function CommentListitem(props: CommentProps) {
+  let commenter: User | undefined = props.users.find(
+    (user) => props.comment.userId === user.id
+  );
+  //   console.log("this is the commenter", commenter);
+
   return (
     <div className="post--comment">
       <div className="avatar-small">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3K588mpXWsXuFcE26ZsuTRN2IeFeKCub8hA&amp;usqp=CAU"
-          alt="Van Gogh"
-        />
+        <img src={commenter.avatar} alt={commenter.username} />
       </div>
       <p>{props.comment.content}</p>
     </div>
   );
 }
 export default CommentListitem;
-
-
-
-
-
-
-(http://localhost:4000/posts) comments.userId = (http://localhost:4000/users) users.id ===  bingo !

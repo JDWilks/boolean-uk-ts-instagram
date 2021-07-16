@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Post } from "../Types";
+import { Post, User } from "../Types";
 import PostListItem from "./PostListItem";
 
 type FeedProps = {
   posts: Post[];
+  users: User[];
 };
 
 function Feed(props: FeedProps) {
@@ -11,7 +12,7 @@ function Feed(props: FeedProps) {
     <section className="feed">
       <ul className="stack">
         {props.posts.map((post) => (
-          <PostListItem post={post} />
+          <PostListItem post={post} users={props.users} />
         ))}
       </ul>
     </section>
