@@ -27,3 +27,12 @@ export type Post = {
   userId: number;
   comments: Comment[];
 };
+
+export type NewPost = {
+  title: string;
+  content: string;
+  image: Image;
+  likes: number;
+  userId: number;
+  // comments: Comment[];
+};

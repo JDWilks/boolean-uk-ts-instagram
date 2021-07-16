@@ -4,6 +4,7 @@ import "../src/styles/index.css";
 import HeaderSection from "./Components/HeaderSection";
 import MainSection from "./Components/MainSection";
 import { User, Post } from "./Types";
+import { useStore } from "./Components/Store";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -29,6 +30,18 @@ function App() {
       body: JSON.stringify(newPost),
     });
   }
+
+  function BearCounter() {
+    const bears = useStore((state) => state.bears);
+    console.log("bearcounterlog", bears);
+  }
+
+  function Controls() {
+    const increasePopulation = useStore((state) => state.increasePopulation);
+    return <button onClick={increasePopulation}>one up</button>;
+  }
+  BearCounter();
+  Controls();
 
   return (
     <div className="App">

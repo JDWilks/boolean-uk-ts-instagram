@@ -15,7 +15,7 @@ function CommentListitem(props: CommentProps) {
   return (
     <div className="post--comment">
       <div className="avatar-small">
-        <img src={commenter.avatar} alt={commenter.username} />
+        <img src={commenter?.avatar} alt={commenter?.username} />
       </div>
       <p>{props.comment.content}</p>
     </div>

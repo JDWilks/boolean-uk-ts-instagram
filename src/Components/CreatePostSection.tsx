@@ -1,16 +1,15 @@
 import React from "react";
+import { NewPost } from "../Types";
 
 function CreatePostSection() {
   // space
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    const targetForm = event.target as typeof event.targetForm & {
-      title: { value: string };
-      image: { value: string };
-      content: { value: string };
-    };
+    const targetForm = event.target as HTMLFormElement;
+    console.log("targetForm.title...", targetForm.title);
+    const altInput = targetForm.title as HTMLInputElement;
 
-    const newPost = {
+    const newPost: NewPost = {
       image: {
         src: targetForm.image.value,
         alt: targetForm.title.value,
