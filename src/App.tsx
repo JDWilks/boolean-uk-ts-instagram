@@ -7,14 +7,19 @@ import { User, Post } from "./Types";
 import { useStore } from "./Components/Store";
 
 function App() {
-  const [users, setUsers] = useState<User[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
 
+  const fetchUsers = useStore((store) => store.fetchUsers);
+
   useEffect(() => {
-    fetch("http://localhost:4000/users")
-      .then((resp) => resp.json())
-      .then(setUsers);
+    fetchUsers();
   }, []);
+
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/users")
+  //     .then((resp) => resp.json())
+  //     .then(setUsers);
+  // }, []);
 
   useEffect(() => {
     fetch("http://localhost:4000/posts")
@@ -31,28 +36,16 @@ function App() {
     });
   }
 
-  function BearCounter() {
-    const bears = useStore((state) => state.bears);
-    console.log("bearcounterlog", bears);
-  }
-
-  function Controls() {
-    const increasePopulation = useStore((state) => state.increasePopulation);
-    return <button onClick={increasePopulation}>one up</button>;
-  }
-  BearCounter();
-  Controls();
-
   return (
     <div className="App">
       <div id="root">
         <header className="main-header">
-          <HeaderSection users={users} />
+          <HeaderSection />
         </header>
         <main className="wrapper">
           <MainSection
             posts={posts}
-            users={users}
+            // users={users}
             postToServer={postToServer}
           />
         </main>

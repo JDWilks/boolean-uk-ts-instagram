@@ -1,13 +1,16 @@
 import React from "react";
 import { Comment, User } from "../Types";
+import { useStore } from "./Store";
 
 type CommentProps = {
   comment: Comment;
-  users: User[];
+  // users: User[];
 };
 
 function CommentListitem(props: CommentProps) {
-  let commenter: User | undefined = props.users.find(
+  const users = useStore((store) => store.users);
+
+  let commenter: User | undefined = users.find(
     (user) => props.comment.userId === user.id
   );
   //   console.log("this is the commenter", commenter);

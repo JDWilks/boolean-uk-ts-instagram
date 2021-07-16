@@ -1,20 +1,23 @@
 import React from "react";
 import { Post, User } from "../Types";
 import CommentListitem from "./Comment";
+import { useStore } from "./Store";
 
 type PostProps = {
   post: Post;
-  users: User[];
+  // users: User[];
 };
 
 function PostListItem(props: PostProps) {
-  let postUser: User | undefined = props.users.find(
+  const users = useStore((store) => store.users);
+
+  let postUser: User | undefined = users.find(
     (user) => props.post.userId === user.id
   );
   //   console.log("this is the postuser", postUser);
 
   return (
-    <li className="post">
+    <li key={props.post.id} className="post">
       <div className="chip active">
         <div className="avatar-small">
           <img src={postUser?.avatar} alt={postUser?.username} />
@@ -31,7 +34,7 @@ function PostListItem(props: PostProps) {
       <div className="post--comments">
         <h3>Comments</h3>
         {props.post.comments.map((comment) => (
-          <CommentListitem comment={comment} users={props.users} />
+          <CommentListitem comment={comment} users={users} />
         ))}
 
         <form id="create-comment-form" autoComplete="off">
