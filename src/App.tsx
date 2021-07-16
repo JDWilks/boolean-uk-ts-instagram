@@ -22,6 +22,14 @@ function App() {
       .then(setPosts);
   }, []);
 
+  function postToServer(newPost) {
+    fetch("http://localhost:4000/posts", {
+      method: "Post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPost),
+    });
+  }
+
   return (
     <div className="App">
       <div id="root">
@@ -29,7 +37,11 @@ function App() {
           <HeaderSection users={users} />
         </header>
         <main className="wrapper">
-          <MainSection posts={posts} users={users} />
+          <MainSection
+            posts={posts}
+            users={users}
+            postToServer={postToServer}
+          />
         </main>
       </div>
     </div>
@@ -37,3 +49,23 @@ function App() {
 }
 
 export default App;
+
+// function handleSubmit(event: React.SyntheticEvent) {
+//   event.preventDefault();
+//   const targetForm = event.target as typeof event.targetForm & {
+//     title: { value: string };
+//     image: { value: string };
+//     content: { value: string };
+//   };
+//   const title = targetForm.title.value;
+//   const image = targetForm.image.value;
+//   const content = targetForm.content.value;
+//   console.log("targetForm", targetForm);
+//   console.log("content", content);
+//   console.log("image", image);
+//   console.log("title", title);
+//   postToServer();
+//   targetForm.reset();
+// }
+
+// we need to make post fetch request to put the above on the server.

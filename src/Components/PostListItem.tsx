@@ -17,9 +17,9 @@ function PostListItem(props: PostProps) {
     <li className="post">
       <div className="chip active">
         <div className="avatar-small">
-          <img src={postUser.avatar} alt={postUser.username} />
+          <img src={postUser?.avatar} alt={postUser?.username} />
         </div>
-        <span>{postUser.username}</span>
+        <span>{postUser?.username}</span>
       </div>
       <div className="post--image">
         <img src={props.post.image.src} alt="undefined" />

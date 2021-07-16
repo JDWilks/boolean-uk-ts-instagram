@@ -9,14 +9,20 @@ function CreatePostSection() {
       image: { value: string };
       content: { value: string };
     };
-    const title = targetForm.title.value;
-    const image = targetForm.image.value;
-    const content = targetForm.content.value;
-    console.log("targetForm", targetForm);
-    console.log("content", content);
-    console.log("image", image);
-    console.log("title", title);
-    postToServer();
+
+    const newPost = {
+      image: {
+        src: targetForm.image.value,
+        alt: targetForm.title.value,
+      },
+      title: targetForm.title.value,
+      content: targetForm.content.value,
+      userId: 1,
+      likes: 0,
+    };
+
+    // postToServer(newPost);
+    console.log("newPost is", newPost);
     targetForm.reset();
   }
 
